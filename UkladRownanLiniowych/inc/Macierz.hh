@@ -4,38 +4,37 @@
 #include "rozmiar.h"
 #include <iostream>
 
-
-/*
- *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
- *  i jakie ma glowne cechy.
- */
 class Macierz {
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
-   */
+
+   Wektor tabM[ROZMIAR];
+
   public:
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */    
+
+    Macierz(Wektor A, Wektor B, Wektor C);
+
+    const Wektor & operator *(const Wektor & B);
+    double wyznacznik(); //Sarrus
+    Macierz transponuj() const;
+
+    Wektor & operator [](int index); // W[2][0] - zerowy element drugiego wektora
+    double & operator () (int ind1, int ind2); // M(2,0)
+
+    Macierz & operator + (const MacierzKw & B);
+    Macierz & operator - (const MacierzKw & B);
+    Macierz & operator * (const MacierzKw & B);
+    Macierz & operator * (double B);
+
+    bool operator == (const MacierzKw & W2) const;
+    bool operator != (const MacierzKw & W2) const;
+
+
+ //   Macierz odwroc() const;
+
+
 };
 
-
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
 std::istream& operator >> (std::istream &Strm, Macierz &Mac);
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
 std::ostream& operator << (std::ostream &Strm, const Macierz &Mac);
 
 

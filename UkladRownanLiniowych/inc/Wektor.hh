@@ -13,29 +13,32 @@ class Wektor {
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
    */
+    double tabW[ROZMIAR]
   public:
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */    
+   */
+    Wektor (double xx, double yy, double zz);
+    const double & operator [](int index) const;
+    double & operator [](int index);
+
+    Wektor operator + (const & Wektor W2) const;
+    Wektor operator - (const Wektor & W2) const;
+    double operator * (const Wektor & W2) const;
+    Wektor operator * (double L2) const; // W1 * 3
+    Wektor operator / (double L2) const;
+
+    double dlugosc();
+
+    bool operator == (const Wektor W2);
+    bool operator != (const Wektor W2);
 };
 
+Wektor operator * (double L1, Wektor W2); // 3 * W2
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
+
 std::istream& operator >> (std::istream &Strm, Wektor &Wek);
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
 std::ostream& operator << (std::ostream &Strm, const Wektor &Wek);
 
 #endif
