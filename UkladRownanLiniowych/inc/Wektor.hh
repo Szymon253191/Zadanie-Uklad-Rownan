@@ -3,22 +3,21 @@
 
 #include "rozmiar.h"
 #include <iostream>
-
+#include <math.h>
+using namespace std;
 
 /*
  *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
  *  i jakie ma glowne cechy.
  */
 class Wektor {
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
-   */
-    double tabW[ROZMIAR]
+
+    double tabW[ROZMIAR];
+
   public:
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */
+
     Wektor (double xx, double yy, double zz);
+    Wektor ();
     const double & operator [](int index) const;
     double & operator [](int index);
 
@@ -37,8 +36,8 @@ class Wektor {
 Wektor operator * (double L1, Wektor W2); // 3 * W2
 
 
-std::istream& operator >> (std::istream &Strm, Wektor &Wek);
+std::istream& operator >> (std::istream & strm, Wektor &Wek);
 
-std::ostream& operator << (std::ostream &Strm, const Wektor &Wek);
+std::ostream& operator << (std::ostream & strm, const Wektor &Wek);
 
 #endif

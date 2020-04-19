@@ -1,20 +1,29 @@
 #include "Macierz.hh"
 
-Macierz(Wektor A, Wektor B, Wektor C)
+Macierz::Macierz(Wektor A, Wektor B, Wektor C)
 {
     tabM[0] = A;
     tabM[1] = B;
     tabM[2] = C;
 }
 
- const Wektor & operator *(const Wektor & B)
+Macierz::Macierz()
+{
+    Wektor W; // (0,0,0)
+    for(int i=0; i<ROZMIAR; i++)
+    {
+        tabM[i]=W;
+    }
+}
+
+Wektor & Macierz::operator *(const Wektor & B) const
  {
     Wektor W;
     for (int i=0; i<ROZMIAR; i++)
     {
         for (int j=0; j<ROZMIAR; j++)
         {
-            W[i] = W[i] + tabM[i][j] * B[j];
+            W[i] += tabM[i][j] * B[j];
         }
     }
     return W;
@@ -27,7 +36,7 @@ double wyznacznik() //Sarrus
     return wyz;
 }
 
-Macierz transponuj() const
+Macierz Macierz::transponuj() const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
@@ -40,17 +49,17 @@ Macierz transponuj() const
     return M;
 }
 
-Wektor & operator [](int index)
+Wektor & Macierz::operator [](int index)
 {
     if(index < 0 || index > 3)
     {
         std::cerr<<"Poza zakresem"<<endl;
         exit (1);
     }
-    else return tab[index];
+    else return tabM[index];
 }
 
-double & operator () (int ind1, int ind2)
+/*double & Macierz::operator () (int ind1, int ind2) //w sumie nie uzywana
 {
     if(ind1 < 0 || ind1 > ROZMIAR || ind2 < 0 || ind2 > ROZMIAR)
     {
@@ -59,44 +68,42 @@ double & operator () (int ind1, int ind2)
     }
     else return tabM[ind1][ind2];
 }
-
-Macierz & operator + (const MacierzKw & B)
+*/
+Macierz & Macierz::operator + (const Macierz & B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
     {
+        M[i] = tabM[i] + B[i];
+    }
+    return M;
+}
+
+Macierz & Macierz::operator - (const Macierz & B) const
+{
+    Macierz M;
+    for (int i=0; i<ROZMIAR; i++)
+    {
+        M[i] = tabM[i] - B[i];
+    }
+    return M;
+}
+
+Macierz & Macierz::operator * (const Macierz & B) const
+{
+    Macierz M;
+    Macierz B = M.transponuj();
+    for (int i=0; i<ROZMIAR; i++)
+    {
         for (int j=0; j<ROZMIAR; j++)
         {
-            M[i][j] = tabM[i][j] + B[i][j];
+            M[i][j] = tab[i] * B[j];
         }
     }
     return M;
 }
 
-Macierz & operator - (const MacierzKw & B)
-{
-    Macierz M;
-    for (int i=0; i<ROZMIAR; i++)
-    {
-        for (int j=0; j<ROZMIAR; j++)
-        {
-            M[i][j] = tabM[i][j] - B[i][j];
-        }
-    }
-    return M;
-}
-
-Macierz & operator * (const MacierzKw & B)
-{
-    Macierz M;
-    Macierz B.tra
-    for (int i=0; i<ROZMIAR; i++)
-    {
-        for (int j=0; j<ROZMIAR; j++)
-    }
-}
-
-Macierz & operator * (double B)
+Macierz & Macierz::operator * (double B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
@@ -109,29 +116,44 @@ Macierz & operator * (double B)
     return M;
 }
 
-bool operator == (const MacierzKw & W2) const
+bool Macierz::operator == (const Macierz & W2) const
 {
-
+    double epsilon = 0.000001;
+    for (int i=0; i<ROZMIAR; i++)
+    {
+        if (abs(tabM[i]-W2[i] < epsilon))
+        {
+            return true;
+        }
+        else return false;
 }
 
-bool operator != (const MacierzKw & W2) const
+bool Macierz::operator != (const Macierz & W2) const
 {
-
+    double epsilon = 0.000001;
+    for (int i=0; i<ROZMIAR; i++)
+    {
+        if (abs(tabM[i]-W2[i] > epsilon))
+        {
+            return true;
+        }
+        else return false;
 }
 
-std::istream& operator >> (std::istream &Strm, Macierz &Mac)
+std::istream& operator >> (std::istream &strm, Macierz &Mac)
 {
     for (int i=0; i<ROZMIAR; i++)
     {
-       std::cout << Mac[i] << " ";
+       std::cin >> Mac[i];
     }
+    return strm;
 }
 
-std::ostream& operator << (std::ostream &Strm, const Macierz &Mac)
+std::ostream& operator << (std::ostream &strm, const Macierz &Mac)
 {
     for (int i=0; i<ROZMIAR; i++)
     {
-        Strm << Mac[i];
+        strm << Mac[i] <<" ";
     }
-    return Strm;
+    return strm;
 }

@@ -3,39 +3,25 @@
 
 #include <iostream>
 
-
-/*
- *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
- *  i jakie ma glowne cechy.
- */
 class UkladRownanLiniowych {
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
-   */
+
+    Macierz A; // Ax = b
+    Wektor b;
+
   public:
-  /*
-   *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
-   */    
+
+    const Wektor & rozwiaz();
+    UkladRownanL();
+    UkladRownanL(const Macierz & M, const Wektor & W);
+    const Wektor & Zwroc_wektor_wolny();
+    void Zmien_wektor_wolny(const Wektor & W);
+    //analogicznie dla macierzy
 };
 
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
 std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych &UklRown);
 
-/*
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
- */
-std::ostream& operator << ( std::ostream                  &Strm, 
+std::ostream& operator << ( std::ostream                  &Strm,
                             const UkladRownanLiniowych    &UklRown
                           );
 
