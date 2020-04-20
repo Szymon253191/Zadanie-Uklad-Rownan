@@ -29,7 +29,7 @@ class Macierz {
     bool operator != (const Macierz & W2) const;
 
 
- //   Macierz odwroc() const;
+    Macierz odwroc() const;
 
 
 };

@@ -140,6 +140,12 @@ bool Macierz::operator != (const Macierz & W2) const
         else return false;
 }
 
+Macierz & Macierz::odwroc() const
+{
+    Macierz M;
+    double Wyz =
+}
+
 std::istream& operator >> (std::istream &strm, Macierz &Mac)
 {
     for (int i=0; i<ROZMIAR; i++)

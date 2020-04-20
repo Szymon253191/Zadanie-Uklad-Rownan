@@ -26,6 +26,16 @@ void Zmien_wektor_wolny(const Wektor & W)
 
 }
 
+const Macierz & Zwroc_macierz()
+{
+
+}
+
+void Zmien_macierz(const Macierz & M)
+{
+
+}
+
 std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych &UklRown)
 {
 
