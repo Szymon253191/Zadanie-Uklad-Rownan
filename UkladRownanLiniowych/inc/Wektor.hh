@@ -21,9 +21,9 @@ class Wektor {
     const double & operator [](int index) const;
     double & operator [](int index);
 
-    Wektor operator + (const & Wektor W2) const;
-    Wektor operator - (const Wektor & W2) const;
-    double operator * (const Wektor & W2) const;
+    Wektor operator + (Wektor const & W2) const;
+    Wektor operator - (Wektor const & W2) const;
+    double operator * (Wektor const & W2) const;
     Wektor operator * (double L2) const; // W1 * 3
     Wektor operator / (double L2) const;
 

@@ -115,23 +115,16 @@ bool Wektor::operator == (const Wektor W2)
     double epsilon=0.000001;
     for (int i=0; i<ROZMIAR; i++)
     {
-        if (abs(tabW[i]-W2[i] < epsilon))
+        if (!abs(tabW[i]-W2[i] < epsilon))
         {
-            return true;
+            return false;
         }
-        else return false;
+        else return true;
 }
 
 bool Wektor::operator != (const Wektor W2)
 {
-   double epsilon=0.000001;
-    for (int i=0; i<ROZMIAR; i++)
-    {
-        if (abs(tabW[i]-W2[i] > epsilon))
-        {
-            return true;
-        }
-        else return false;
+  if ()
 }
 
 std::istream & operator >> (std::istream & strm, Wektor & Wek)

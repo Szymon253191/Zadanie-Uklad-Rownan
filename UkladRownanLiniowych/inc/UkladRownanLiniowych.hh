@@ -11,11 +11,12 @@ class UkladRownanLiniowych {
   public:
 
     Wektor & rozwiaz() const;
-    UkladRownanL() const;
+    UkladRownanL(){};
     UkladRownanL(const Macierz & M, const Wektor & W);
-    const Wektor & Zwroc_wektor_wolny();
+    UkladRownanL(Macierz _A, Wektor _b): A(_A), b(_b);
+    Wektor & Zwroc_wektor_wolny() const;
     void Zmien_wektor_wolny(const Wektor & W);
-    const Macierz & Zwroc_macierz();
+    Macierz & Zwroc_macierz() const;
     void Zmien_macierz(const Macierz & M);
 };
 

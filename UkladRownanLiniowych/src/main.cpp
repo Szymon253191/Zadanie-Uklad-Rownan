@@ -19,6 +19,9 @@ int main()
 {
   UkladRownanLiniowych   UklRown;   // To tylko przykladowe definicje zmiennej
 
-  
-  cout << endl << " Start programu " << endl << endl;
+
+  cout << endl << " Start programu " << endl << endl << " Wprowadz uklad rownan: " << endl << endl;
+  cin >> UklRown;
+  Wektor W = UklRown.rozwiaz();
+  cout << W;
 }
