@@ -34,14 +34,14 @@ Wektor  Macierz::operator *(const Wektor & B) const
     return W;
  }
 
-double wyznacznik() //Sarrus
+double Macierz::wyznacznik() const //Sarrus
 {
     double wynik;
     wynik = ((tabM[0][0]*tabM[1][1]*tabM[2][2]) + (tabM[0][1]*tabM[1][2]*tabM[2][0]) + (tabM[0][2]*tabM[1][0]*tabM[2][1]) - (tabM[0][2]*tabM[1][1]*tabM[2][0]) - (tabM[0][1]*tabM[1][0]*tabM[2][2]) - (tabM[0][0]*tabM[1][2]*tabM[2][1]));
     return wynik;
 }
 
-Macierz Macierz::transponuj() const
+Macierz Macierz::transponuj() const 
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
@@ -54,7 +54,7 @@ Macierz Macierz::transponuj() const
     return M;
 }
 
-Wektor & Macierz::operator [](int index)
+const Wektor & Macierz::operator [](int index) const
 {
     if(index < 0 || index > 3)
     {
@@ -74,7 +74,7 @@ Wektor & Macierz::operator [](int index)
     else return tabM[ind1][ind2];
 }
 */
-Macierz  Macierz::operator + (Macierz & B) const
+Macierz  Macierz::operator + (const Macierz & B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
@@ -84,7 +84,7 @@ Macierz  Macierz::operator + (Macierz & B) const
     return M;
 }
 
-Macierz  Macierz::operator - (Macierz & B) const
+Macierz  Macierz::operator - (const Macierz & B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
@@ -94,19 +94,14 @@ Macierz  Macierz::operator - (Macierz & B) const
     return M;
 }
 
-Macierz  Macierz::operator * (Macierz & B) const
+Macierz  Macierz::operator * (const Macierz & B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
     {
-        M[i] = tabM[i];
-    }
-    B = M.transponuj();
-    for (int i=0; i<ROZMIAR; i++)
-    {
         for (int j=0; j<ROZMIAR; j++)
         {
-            M[i][j] = tabM[i] * B[j];
+            M[i][j] = tabM[i] * B.transponuj()[j];
         }
     }
     return M;
@@ -122,11 +117,12 @@ Macierz  Macierz::operator * (double B) const
     return M;
 }
 
-bool Macierz::operator == (Macierz & M2) const
+bool Macierz::operator == (const Macierz & M2) const
 {
+    double epsilon = 0.000001;
     for(int i=0;i<ROZMIAR;i++)
     {
-        if(tabM[i]!=M2[i]) 
+        if(abs(this->tabM[i]==M2[i])<epsilon) 
         {
             return false;
         }
@@ -135,8 +131,10 @@ bool Macierz::operator == (Macierz & M2) const
     
 }
 
-bool Macierz::operator != (Macierz & M2) const
+bool Macierz::operator != (const Macierz & M2) const 
 {
+    return !(*this==M2);
+    /*
     double epsilon = 0.000001;
     for (int i=0; i<ROZMIAR; i++)
     {
@@ -145,7 +143,7 @@ bool Macierz::operator != (Macierz & M2) const
             return false;
         }
         else return true;
-    }
+    }*/
 }
 /*Macierz & Macierz::odwroc() const
 {
@@ -168,7 +166,7 @@ std::ostream& operator << (std::ostream &strm, const Macierz &Mac)
     {
         for (int j=0; j<ROZMIAR; j++)
         {
-            strm << Mac.transponuj[i][j] <<" ";
+            strm << Mac <<" ";
         }
     }
     return strm;

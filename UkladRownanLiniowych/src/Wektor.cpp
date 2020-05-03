@@ -35,7 +35,7 @@ double & Wektor::operator [](int index)
     else return tab[index];
 }
 
-Wektor Wektor::operator + (Wektor & W2) const
+Wektor Wektor::operator + (const Wektor & W2) const
 {
     Wektor Wynik;
     for (int i=0; i<ROZMIAR; i++)
@@ -45,7 +45,7 @@ Wektor Wektor::operator + (Wektor & W2) const
     return Wynik;
 }
 
-Wektor Wektor::operator - (Wektor & W2) const
+Wektor Wektor::operator - (const Wektor & W2) const
 {
     Wektor Wynik;
     for (int i=0; i<ROZMIAR; i++)
@@ -55,7 +55,7 @@ Wektor Wektor::operator - (Wektor & W2) const
     return Wynik;
 }
 
-double Wektor::operator * (Wektor & W2) const
+double Wektor::operator * (const Wektor & W2) const
 {
     double Wynik = 0;
     for (int i=0; i<ROZMIAR; i++)
@@ -103,19 +103,19 @@ Wektor Wektor::operator / (double L2) const
     }
 }
 
-double dlugosc()
+double Wektor::dlugosc()
 {
     double Wynik;
     Wynik = sqrt((tab[0]*tab[0]) + (tab[1]*tab[1]) + (tab[2]*tab[2]));
     return Wynik;
 }
 
-bool Wektor::operator == (Wektor & W2)
+bool Wektor::operator == (const Wektor & W2) const
 {
     double epsilon=0.000001;
     for (int i=0; i<ROZMIAR; i++)
     {
-        if (!abs(tab[i]-W2[i] < epsilon))
+        if (abs(tab[i]-W2[i] > epsilon))
         {
             return false;
         }
@@ -123,7 +123,7 @@ bool Wektor::operator == (Wektor & W2)
     }
 }
 
-bool Wektor::operator != (Wektor & W2)
+bool Wektor::operator != (const Wektor & W2) const
 {
     double epsilon=0.000001;
     for (int i=0; i<ROZMIAR; i++)

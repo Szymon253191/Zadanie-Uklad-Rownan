@@ -6,10 +6,10 @@ UkladRownanLiniowych::UkladRownanLiniowych(const Macierz & M, const Wektor & W)
     b = W;
 }
 
-Wektor & UkladRownanLiniowych::rozwiaz() 
+Wektor UkladRownanLiniowych::rozwiaz() 
 {
     Wektor Wy;
-    Macierz M = A;
+    Macierz M = A.transponuj();
     Wektor W(b);
     double Wyzn = M.wyznacznik();
 

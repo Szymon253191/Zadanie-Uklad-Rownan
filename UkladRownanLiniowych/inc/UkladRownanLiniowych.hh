@@ -10,7 +10,7 @@ class UkladRownanLiniowych {
 
   public:
 
-    Wektor & rozwiaz();
+    Wektor rozwiaz();
     UkladRownanLiniowych(){};
     UkladRownanLiniowych(const Macierz & M, const Wektor & W);
     UkladRownanLiniowych(Macierz _A, Wektor _b): A(_A), b(_b){};
