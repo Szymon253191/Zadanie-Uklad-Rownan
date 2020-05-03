@@ -2,27 +2,17 @@
 
 Wektor::Wektor(double xx, double yy, double zz)
 {
-    tabW[0] = xx;
-    tabW[1] = yy;
-    tabW[2] = zz;
+    tab[0] = xx;
+    tab[1] = yy;
+    tab[2] = zz;
 }
 
 Wektor::Wektor()
 {
     for(int i=0; i<ROZMIAR; i++)
     {
-        tabW[i]=0;
+        tab[i]=0;
     }
-}
-
-double & Wektor::operator [](int index) const
-{
-    if(index < 0 || index > 3)
-    {
-        std::cerr<<"Poza zakresem"<<endl;
-        exit (1);
-    }
-    else return tabW[index];
 }
 
 double & Wektor::operator [](int index)
@@ -32,35 +22,45 @@ double & Wektor::operator [](int index)
         std::cerr<<"Poza zakresem"<<endl;
         exit (1);
     }
-    else return tabW[index];
+    else return tab[index];
 }
 
-Wektor Wektor::operator + (const & Wektor W2) const
+double & Wektor::operator [](int index)
+{
+    if(index < 0 || index > 3)
+    {
+        std::cerr<<"Poza zakresem"<<endl;
+        exit (1);
+    }
+    else return tab[index];
+}
+
+Wektor Wektor::operator + (Wektor & W2) const
 {
     Wektor Wynik;
     for (int i=0; i<ROZMIAR; i++)
     {
-        Wynik[i] = W2[i] + tabW[i];
+        Wynik[i] = W2[i] + tab[i];
     }
     return Wynik;
 }
 
-Wektor Wektor::operator - (const & Wektor W2) const
+Wektor Wektor::operator - (Wektor & W2) const
 {
     Wektor Wynik;
     for (int i=0; i<ROZMIAR; i++)
     {
-        Wynik[i] = tabW[i] - W2[i];
+        Wynik[i] = tab[i] - W2[i];
     }
     return Wynik;
 }
 
-double Wektor::operator * (const Wektor & W2) const
+double Wektor::operator * (Wektor & W2) const
 {
     double Wynik = 0;
     for (int i=0; i<ROZMIAR; i++)
     {
-        Wynik += tabW[i] * W2[i];
+        Wynik += tab[i] * W2[i];
     }
     return Wynik;
 }
@@ -70,12 +70,12 @@ Wektor Wektor::operator * (double L2)  const// W1 * L2
     Wektor Wynik;
     for (int i=0; i<ROZMIAR; i++)
     {
-        Wynik[i] = tabW[i] * L2;
+        Wynik[i] = tab[i] * L2;
     }
     return Wynik;
 }
 
-Wektor Wektor::operator * (double L1, Wektor W2)  const// L1 * W2
+/*Wektor Wektor::operator * (double L1, Wektor W2)  const// L1 * W2
 {
     Wektor Wynik;
     for (int i=0; i<ROZMIAR; i++)
@@ -84,7 +84,7 @@ Wektor Wektor::operator * (double L1, Wektor W2)  const// L1 * W2
     }
     return Wynik;
 }
-
+*/
 Wektor Wektor::operator / (double L2) const
 {
     if (L2 == 0)
@@ -97,7 +97,7 @@ Wektor Wektor::operator / (double L2) const
         Wektor Wynik;
         for (int i=0; i<ROZMIAR; i++)
         {
-            Wynik[i] = tabW[i] / L2;
+            Wynik[i] = tab[i] / L2;
         }
         return Wynik;
     }
@@ -106,25 +106,34 @@ Wektor Wektor::operator / (double L2) const
 double dlugosc()
 {
     double Wynik;
-    Wynik = sqrt((tabW[0]*tabW[0]) + (tabW[1]*tabW[1]) + (tabW[2]*tabW[2]);
+    Wynik = sqrt((tab[0]*tab[0]) + (tab[1]*tab[1]) + (tab[2]*tab[2]));
     return Wynik;
 }
 
-bool Wektor::operator == (const Wektor W2)
+bool Wektor::operator == (Wektor & W2)
 {
     double epsilon=0.000001;
     for (int i=0; i<ROZMIAR; i++)
     {
-        if (!abs(tabW[i]-W2[i] < epsilon))
+        if (!abs(tab[i]-W2[i] < epsilon))
         {
             return false;
         }
         else return true;
+    }
 }
 
-bool Wektor::operator != (const Wektor W2)
+bool Wektor::operator != (Wektor & W2)
 {
-  if ()
+    double epsilon=0.000001;
+    for (int i=0; i<ROZMIAR; i++)
+    {
+        if (abs(tab[i]-W2[i] < epsilon))
+        {
+            return false;
+        }
+        else return true;
+    }
 }
 
 std::istream & operator >> (std::istream & strm, Wektor & Wek)

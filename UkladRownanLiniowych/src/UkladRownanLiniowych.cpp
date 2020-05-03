@@ -1,19 +1,19 @@
 #include "UkladRownanLiniowych.hh"
 
-UkladRownanL(const Macierz & M, const Wektor & W)
+UkladRownanLiniowych::UkladRownanLiniowych(const Macierz & M, const Wektor & W)
 {
     A = M;
     b = W;
 }
 
-Wektor & UkladRownanLiniowych::rozwiaz() const
+Wektor & UkladRownanLiniowych::rozwiaz() 
 {
     Wektor Wy;
     Macierz M = A;
     Wektor W(b);
     double Wyzn = M.wyznacznik();
 
-    if (Wyzn = 0)
+    if ((Wyzn = 0))
     {
         std::cerr<<"Blad, wyznacznik = 0";
         exit(1);
@@ -34,7 +34,7 @@ Wektor & UkladRownanLiniowych::rozwiaz() const
     return Wy;
 }
 
-Wektor & UkladRownanLiniowych::Zwroc_wektor_wolny() const
+Wektor & UkladRownanLiniowych::Zwroc_wektor_wolny()
 {
     return b;
 }
@@ -44,7 +44,7 @@ void UkladRownanLiniowych::Zmien_wektor_wolny(const Wektor & W)
     b = W;
 }
 
-Macierz & UkladRownanLiniowych::Zwroc_macierz() const
+Macierz & UkladRownanLiniowych::Zwroc_macierz()
 {
     return A;
 }
@@ -64,9 +64,7 @@ std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych &UklRown)
     return Strm;
 }
 
-std::ostream& operator << ( std::ostream                  &Strm,
-                            const UkladRownanLiniowych    &UklRown
-                          )
+std::ostream& operator << ( std::ostream &Strm,UkladRownanLiniowych &UklRown)
 {
     Strm << "Macierz A: " << UklRown.Zwroc_macierz().transponuj() << "Wektor B: " << UklRown.Zwroc_wektor_wolny() << endl;
     return Strm;

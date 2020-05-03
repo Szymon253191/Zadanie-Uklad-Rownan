@@ -1,6 +1,6 @@
 #ifndef MACIERZ_HH
 #define MACIERZ_HH
-
+#include "Wektor.hh"
 #include "rozmiar.h"
 #include <iostream>
 
@@ -20,13 +20,13 @@ class Macierz {
     Wektor & operator [](int index); // W[2][0] - zerowy element drugiego wektora
  //   double & operator () (int ind1, int ind2); // M(2,0)
 
-    Macierz  operator + (const Macierz & B) const;
-    Macierz  operator - (const Macierz & B) const;
-    Macierz  operator * (const Macierz & B) const;
+    Macierz  operator + (Macierz & B) const;
+    Macierz  operator - (Macierz & B) const;
+    Macierz  operator * (Macierz & B) const;
     Macierz  operator * (double B) const;
 
-    bool operator == (const Macierz & M2) const;
-    bool operator != (const Macierz & M2) const;
+    bool operator == (Macierz & M2) const;
+    bool operator != (Macierz & M2) const;
 
 
   //  Macierz odwroc() const;

@@ -12,7 +12,7 @@ using namespace std;
  */
 class Wektor {
 
-    double tabW[ROZMIAR];
+    double tab[ROZMIAR];
 
   public:
 
@@ -21,16 +21,16 @@ class Wektor {
     const double & operator [](int index) const;
     double & operator [](int index);
 
-    Wektor operator + (Wektor const & W2) const;
-    Wektor operator - (Wektor const & W2) const;
-    double operator * (Wektor const & W2) const;
+    Wektor operator + (Wektor & W2) const;
+    Wektor operator - (Wektor & W2) const;
+    double operator * (Wektor & W2) const;
     Wektor operator * (double L2) const; // W1 * 3
     Wektor operator / (double L2) const;
 
     double dlugosc();
 
-    bool operator == (const Wektor W2);
-    bool operator != (const Wektor W2);
+    bool operator == (Wektor & W2);
+    bool operator != (Wektor & W2);
 };
 
 Wektor operator * (double L1, Wektor W2); // 3 * W2

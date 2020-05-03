@@ -1,4 +1,5 @@
 #include "Macierz.hh"
+#include <algorithm>
 
 Macierz::Macierz(Wektor A, Wektor B, Wektor C)
 {
@@ -35,9 +36,9 @@ Wektor  Macierz::operator *(const Wektor & B) const
 
 double wyznacznik() //Sarrus
 {
-    double wyz;
-    wyz = (tabM[0][0]*tabM[1][1]*tabM[2][2]) + (tabM[0][1]*tabM[1][2]*tabM[2][0]) + (tabM[0][2]*tabM[1][0]*tabM[2][1]) - (tabM[0][2]*tabM[1][1]*tabM[2][0]) - (tabM[0][1]*tabM[1][0]*tabM[2][2]) - (tabM[0][0]*tabM[1][2]*tabM[2][1])
-    return wyz;
+    double wynik;
+    wynik = ((tabM[0][0]*tabM[1][1]*tabM[2][2]) + (tabM[0][1]*tabM[1][2]*tabM[2][0]) + (tabM[0][2]*tabM[1][0]*tabM[2][1]) - (tabM[0][2]*tabM[1][1]*tabM[2][0]) - (tabM[0][1]*tabM[1][0]*tabM[2][2]) - (tabM[0][0]*tabM[1][2]*tabM[2][1]));
+    return wynik;
 }
 
 Macierz Macierz::transponuj() const
@@ -73,7 +74,7 @@ Wektor & Macierz::operator [](int index)
     else return tabM[ind1][ind2];
 }
 */
-Macierz  Macierz::operator + (const Macierz & B) const
+Macierz  Macierz::operator + (Macierz & B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
@@ -83,7 +84,7 @@ Macierz  Macierz::operator + (const Macierz & B) const
     return M;
 }
 
-Macierz  Macierz::operator - (const Macierz & B) const
+Macierz  Macierz::operator - (Macierz & B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
@@ -93,14 +94,14 @@ Macierz  Macierz::operator - (const Macierz & B) const
     return M;
 }
 
-Macierz  Macierz::operator * (const Macierz & B) const
+Macierz  Macierz::operator * (Macierz & B) const
 {
     Macierz M;
     for (int i=0; i<ROZMIAR; i++)
     {
         M[i] = tabM[i];
     }
-    Macierz B = M.transponuj();
+    B = M.transponuj();
     for (int i=0; i<ROZMIAR; i++)
     {
         for (int j=0; j<ROZMIAR; j++)
@@ -121,23 +122,31 @@ Macierz  Macierz::operator * (double B) const
     return M;
 }
 
-bool Macierz::operator == (const Macierz & M2) const
+bool Macierz::operator == (Macierz & M2) const
+{
+    for(int i=0;i<ROZMIAR;i++)
+    {
+        if(tabM[i]!=M2[i]) 
+        {
+            return false;
+        }
+    }
+    return true;
+    
+}
+
+bool Macierz::operator != (Macierz & M2) const
 {
     double epsilon = 0.000001;
     for (int i=0; i<ROZMIAR; i++)
     {
-        if (!abs(tabM[i]-M2[i] < epsilon))
+        if (!abs((tabM[i]-M2[i]) > epsilon))
         {
             return false;
         }
         else return true;
+    }
 }
-
-bool Macierz::operator != (const Macierz & M2) const
-{
-    return !(tab==M2);
-}
-
 /*Macierz & Macierz::odwroc() const
 {
     Macierz M;
